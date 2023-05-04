@@ -91,4 +91,10 @@ public class Player : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    public void Die()
+    {
+        transform.position = Vector3.zero;
+        rb.velocity = Vector2.zero;
+    }
 }
