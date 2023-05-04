@@ -8,9 +8,53 @@ public class Player : MonoBehaviour
     public float jumpForce;
     public bool isGrounded = false;
     public GameObject bulletPrefab;
+    private LineRenderer lineRend;
+    private DistanceJoint2D distJoint;
+    private Node selectedNode;
+
+    private void Start()
+    {
+        lineRend = GetComponent<LineRenderer>();
+        distJoint = GetComponent<DistanceJoint2D>();
+        selectedNode = null;
+        lineRend.enabled = false;
+        distJoint.enabled = false;
+    }
+
+    public void SelectNode(Node node)
+    {
+        selectedNode = node;
+    }
+
+    public void DeselectNode()
+    {
+        selectedNode = null;
+    }
+
+    private void NodeBehaviour()
+    {
+        if (selectedNode == null)
+        {
+            lineRend.enabled = false;
+            distJoint.enabled = false;
+            return;
+        }
+
+        lineRend.enabled = true;
+        distJoint.enabled = true;
+        distJoint.connectedBody = selectedNode.GetComponent<Rigidbody2D>();
+
+        if(selectedNode != null)
+        {
+            lineRend.SetPosition(0, transform.position);
+            lineRend.SetPosition(1, selectedNode.transform.position);
+        }
+    }
+
 
     void Update()
     {
+        NodeBehaviour();
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(new Vector2(-1, 0));
