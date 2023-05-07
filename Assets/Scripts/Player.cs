@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         NodeBehaviour();
@@ -67,13 +66,13 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(new Vector2(0, jumpForce));
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 dir = mouseWorldPos - transform.position;
-            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir.x, dir.y).normalized *1000);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        //    Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    Vector3 dir = mouseWorldPos - transform.position;
+        //    bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir.x, dir.y).normalized *1000);
+        //}
     }
 
     private void OnCollisionStay2D(Collision2D collision)
